@@ -1,9 +1,25 @@
 [project]
 name = "technical-documentation-knowledge-graph"
 version = "0.1.0"
-description = "Add your description here"
+description = "LLM-powered knowledge graph from developer documentation"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "pydantic>=2.13.4",
+]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["D", "E", "F", "I", "N"]
+ignore = ["D100", "D104", "D107", "D203", "D212", "D213", "D402", "D413", "D415", "N802", "N803", "N806", "N815", "N816"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.20",
 ]
