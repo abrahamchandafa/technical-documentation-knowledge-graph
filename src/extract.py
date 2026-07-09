@@ -6,23 +6,16 @@ then parses the response into validated Triple objects.
 
 import json
 import logging
-import os
 from pathlib import Path
 
 import httpx
-from dotenv import load_dotenv
 from tqdm import tqdm
 
 from .ontology import EntityType, RelationshipType, Triple
-
-load_dotenv()
+from .settings import settings
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
-
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
-OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "openai/gpt-4o-mini")
-OPENROUTER_BASE = "https://openrouter.ai/api/v1"
 
 SYSTEM_PROMPT = "\n".join(
     [
@@ -75,13 +68,13 @@ def extract_triples(
         ConnectionError: If the API call fails.
         ValueError: If the response cannot be parsed.
     """
-    if not OPENROUTER_API_KEY:
+    if not settings.openrouter_api_key:
         raise ValueError(
             "OPENROUTER_API_KEY not set. Add it to your .env file or environment variables."
         )
 
     payload = {
-        "model": OPENROUTER_MODEL,
+        "model": settings.openrouter_model,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {
@@ -93,27 +86,34 @@ def extract_triples(
     }
 
     headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Authorization": f"Bearer {settings.openrouter_api_key}",
         "Content-Type": "application/json",
     }
 
-    logger.info("Sending %d characters to %s", len(text), OPENROUTER_MODEL)
+    logger.info("Sending %d characters to %s", len(text), settings.openrouter_model)
     with httpx.Client(timeout=120.0) as client:
         with tqdm(total=1, desc="Calling OpenRouter", unit="req") as pbar:
             response = client.post(
-                f"{OPENROUTER_BASE}/chat/completions",
+                f"{settings.openrouter_base}/chat/completions",
                 json=payload,
                 headers=headers,
             )
             pbar.update(1)
 
     if response.status_code != 200:
-        raise ConnectionError(
-            f"OpenRouter API returned {response.status_code}: {response.text}"
-        )
+        raise ConnectionError(f"OpenRouter API returned {response.status_code}: {response.text}")
 
     body = response.json()
-    content = body["choices"][0]["message"]["content"]
+    choice = body["choices"][0]
+    finish = choice.get("finish_reason", "unknown")
+    content = choice["message"].get("content")
+
+    if content is None:
+        raise ValueError(
+            f"Model returned empty content (finish_reason: {finish}). "
+            f"Full response:\n{json.dumps(body, indent=2)}"
+        )
+
     logger.info("Received response with %d characters", len(content))
     return _parse_response(content, source_document)
 
@@ -172,6 +172,3 @@ def extract_from_file(file_path: str | Path) -> list[Triple]:
     text = path.read_text(encoding="utf-8")
     logger.info("Read %d characters from %s", len(text), path)
     return extract_triples(text, source_document=path.name)
-
-
-
