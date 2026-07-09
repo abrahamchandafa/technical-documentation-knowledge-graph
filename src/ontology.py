@@ -4,13 +4,12 @@ Defines the entity types, relationship types, and validation rules
 that govern what can be extracted and stored in the graph.
 """
 
-from enum import Enum
-from typing import Optional
+from enum import StrEnum
 
 from pydantic import BaseModel
 
 
-class EntityType(str, Enum):
+class EntityType(StrEnum):
     """Allowed entity types for nodes in the knowledge graph."""
 
     FUNCTION = "Function"
@@ -24,7 +23,7 @@ class EntityType(str, Enum):
     LIBRARY = "Library"
 
 
-class RelationshipType(str, Enum):
+class RelationshipType(StrEnum):
     """Allowed relationship types for edges in the knowledge graph."""
 
     CALLS = "CALLS"
@@ -54,8 +53,8 @@ class Triple(BaseModel):
     object: str
     subject_type: EntityType
     object_type: EntityType
-    source_document: Optional[str] = None
-    confidence: Optional[float] = None
+    source_document: str | None = None
+    confidence: float | None = None
 
 
 # Whitelist of valid (subject_type, predicate, object_type) combinations.

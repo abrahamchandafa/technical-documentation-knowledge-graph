@@ -5,7 +5,10 @@ description = "LLM-powered knowledge graph from developer documentation"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "httpx>=0.28.1",
     "pydantic>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "tqdm>=4.68.4",
 ]
 
 [tool.ruff]
