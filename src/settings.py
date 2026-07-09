@@ -19,9 +19,12 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
     )
 
-    openrouter_api_key: str
-    openrouter_model: str = "poolside/laguna-m.1:free"
+    openrouter_api_key: str = ""
+    openrouter_model: str = "openai/gpt-4o-mini"
     openrouter_base: str = "https://openrouter.ai/api/v1"
+    neo4j_uri: str = "bolt://localhost:7687"
+    neo4j_user: str = "neo4j"
+    neo4j_password: str = "password"
     data_raw_dir: str = "data/raw"
     data_processed_dir: str = "data/processed"
 

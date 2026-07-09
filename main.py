@@ -8,9 +8,8 @@ import json
 import logging
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 from src.extract import extract_from_file
+from src.load_neo4j import load_triples
 from src.settings import settings
 from src.validate import validate_triples
 
@@ -18,8 +17,6 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s | %(message)s")
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
-
-load_dotenv(".env")
 
 def main() -> None:
     """Run the full pipeline: extract → validate → save."""
@@ -59,6 +56,8 @@ def main() -> None:
             t.object_type,
             t.object,
         )
+
+    load_triples(valid)
 
 
 if __name__ == "__main__":
