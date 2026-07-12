@@ -18,6 +18,7 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
+
 def main() -> None:
     """Run the full pipeline: extract → validate → save."""
     doc_path = Path(settings.data_raw_dir) / "fastapi_intro.txt"
