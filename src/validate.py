@@ -58,6 +58,3 @@ def validate_triples(triples: list[Triple]) -> list[Triple]:
         valid.append(triple)
 
     return valid
-
-
-
