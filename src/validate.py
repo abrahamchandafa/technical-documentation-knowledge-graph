@@ -29,7 +29,7 @@ def validate_triples(triples: list[Triple]) -> list[Triple]:
     for triple in triples:
         allowed_pairs = VALID_RELATIONSHIPS.get(triple.predicate)
         if allowed_pairs is None:
-            logger.warning(
+            logger.debug(
                 "Unknown relationship %s — rejecting: (%s) %s --[%s]--> (%s) %s",
                 triple.predicate,
                 triple.subject_type,
@@ -38,11 +38,12 @@ def validate_triples(triples: list[Triple]) -> list[Triple]:
                 triple.object_type,
                 triple.object,
             )
+            logger.warning("Unknown relationship %s — rejecting", triple.predicate)
             continue
 
         pair = (triple.subject_type, triple.object_type)
         if pair not in allowed_pairs:
-            logger.warning(
+            logger.debug(
                 "Invalid combo (%s, %s) for %s — rejecting: (%s) %s --[%s]--> (%s) %s",
                 triple.subject_type,
                 triple.object_type,
@@ -52,6 +53,12 @@ def validate_triples(triples: list[Triple]) -> list[Triple]:
                 triple.predicate,
                 triple.object_type,
                 triple.object,
+            )
+            logger.warning(
+                "Invalid combo (%s, %s) for %s — rejecting",
+                triple.subject_type,
+                triple.object_type,
+                triple.predicate,
             )
             continue
 

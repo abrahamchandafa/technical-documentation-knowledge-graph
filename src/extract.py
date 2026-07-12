@@ -154,7 +154,8 @@ def _parse_response(
             )
             triples.append(triple)
         except (KeyError, ValueError) as e:
-            logger.warning("Skipping invalid triple: %s — %s", item, e)
+            logger.debug("Skipping invalid triple: %s — %s", item, e)
+            logger.warning("Skipping invalid triple: %s", e)
 
     return triples
 

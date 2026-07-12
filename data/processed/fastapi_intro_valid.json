@@ -1,86 +1,5 @@
 [
   {
-    "subject": "FastAPI",
-    "predicate": "DEPENDS_ON",
-    "object": "Starlette",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "FastAPI",
-    "predicate": "DEPENDS_ON",
-    "object": "Pydantic",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "FastAPI",
-    "predicate": "DEPENDS_ON",
-    "object": "uvicorn",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "FastAPI",
-    "predicate": "DEPENDS_ON",
-    "object": "fastapi-cli",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "FastAPI",
-    "predicate": "DEPENDS_ON",
-    "object": "fastapi-cloud-cli",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "Pydantic",
-    "predicate": "DEPENDS_ON",
-    "object": "email-validator",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "Starlette",
-    "predicate": "DEPENDS_ON",
-    "object": "httpx",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "Starlette",
-    "predicate": "DEPENDS_ON",
-    "object": "jinja2",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "Starlette",
-    "predicate": "DEPENDS_ON",
-    "object": "python-multipart",
-    "subject_type": "Library",
-    "object_type": "Library",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
     "subject": "Item",
     "predicate": "EXTENDS",
     "object": "BaseModel",
@@ -90,20 +9,11 @@
     "confidence": null
   },
   {
-    "subject": "read_root",
-    "predicate": "RETURNS",
-    "object": "dict",
-    "subject_type": "Function",
-    "object_type": "ResponseType",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "read_item",
-    "predicate": "RETURNS",
-    "object": "dict",
-    "subject_type": "Function",
-    "object_type": "ResponseType",
+    "subject": "Item",
+    "predicate": "BELONGS_TO",
+    "object": "pydantic",
+    "subject_type": "Class",
+    "object_type": "Module",
     "source_document": "fastapi_intro.txt",
     "confidence": null
   },
@@ -122,15 +32,6 @@
     "object": "q",
     "subject_type": "Function",
     "object_type": "Parameter",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "update_item",
-    "predicate": "RETURNS",
-    "object": "dict",
-    "subject_type": "Function",
-    "object_type": "ResponseType",
     "source_document": "fastapi_intro.txt",
     "confidence": null
   },
@@ -153,29 +54,29 @@
     "confidence": null
   },
   {
-    "subject": "update_item",
-    "predicate": "BELONGS_TO",
-    "object": "FastAPI",
+    "subject": "read_root",
+    "predicate": "RETURNS",
+    "object": "dict",
     "subject_type": "Function",
-    "object_type": "Module",
+    "object_type": "ResponseType",
     "source_document": "fastapi_intro.txt",
     "confidence": null
   },
   {
     "subject": "read_item",
-    "predicate": "BELONGS_TO",
-    "object": "FastAPI",
+    "predicate": "RETURNS",
+    "object": "dict",
     "subject_type": "Function",
-    "object_type": "Module",
+    "object_type": "ResponseType",
     "source_document": "fastapi_intro.txt",
     "confidence": null
   },
   {
-    "subject": "read_root",
-    "predicate": "BELONGS_TO",
-    "object": "FastAPI",
+    "subject": "update_item",
+    "predicate": "RETURNS",
+    "object": "dict",
     "subject_type": "Function",
-    "object_type": "Module",
+    "object_type": "ResponseType",
     "source_document": "fastapi_intro.txt",
     "confidence": null
   },
@@ -183,15 +84,6 @@
     "subject": "/items/{item_id}",
     "predicate": "HAS_PARAMETER",
     "object": "item_id",
-    "subject_type": "URL",
-    "object_type": "Parameter",
-    "source_document": "fastapi_intro.txt",
-    "confidence": null
-  },
-  {
-    "subject": "/items/{item_id}",
-    "predicate": "HAS_PARAMETER",
-    "object": "q",
     "subject_type": "URL",
     "object_type": "Parameter",
     "source_document": "fastapi_intro.txt",

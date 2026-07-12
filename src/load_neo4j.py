@@ -4,7 +4,7 @@ import json
 import logging
 from pathlib import Path
 
-from neo4j import GraphDatabase
+from neo4j import GraphDatabase, Query
 from tqdm import tqdm
 
 from .ontology import Triple
@@ -40,15 +40,19 @@ def load_triples(triples: list[Triple]) -> None:
     with driver.session() as session:
         for triple in tqdm(triples, desc="Loading into Neo4j", unit="triple"):
             session.run(
-                (
+                Query(
                     "MERGE (s:Entity {name: $subject, type: $subject_type}) "
                     "MERGE (o:Entity {name: $object, type: $object_type}) "
-                    f"MERGE (s)-[:{triple.predicate}]->(o)"
+                    "WITH s, o "
+                    "CALL apoc.merge.relationship(s, $predicate, {}, {}, o) "
+                    "YIELD rel "
+                    "RETURN count(rel)"
                 ),
                 subject=triple.subject,
                 subject_type=triple.subject_type,
                 object=triple.object,
                 object_type=triple.object_type,
+                predicate=triple.predicate,
             )
 
     driver.close()
