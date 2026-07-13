@@ -1,0 +1,98 @@
+{
+    "uuid": "4ba941f6-c503-4796-ad0b-fc692ce492be",
+    "title": "New dashboard",
+    "version": "2.4",
+    "settings": {
+        "pagenumber": 0,
+        "editable": true,
+        "fullscreenEnabled": false,
+        "parameters": {},
+        "theme": "light"
+    },
+    "pages": [
+        {
+            "title": "Main Page",
+            "reports": [
+                {
+                    "id": "702b1d53-6a86-4149-b7cc-12af950f4f75",
+                    "title": "Hi there 👋",
+                    "query": "**This is your first dashboard!** \n \nYou can click (⋮) to edit this report, or add a new report to get started. You can run any Cypher query directly from each report and render data in a variety of formats. \n \nTip: try _renaming_ this report by editing the title text. You can also edit the dashboard header at the top of the screen.\n\n\n",
+                    "width": 6,
+                    "height": 4,
+                    "x": 0,
+                    "y": 0,
+                    "type": "text",
+                    "selection": {},
+                    "settings": {}
+                },
+                {
+                    "id": "252324ce-8bae-4024-977e-7d7b3901e6cd",
+                    "title": "all",
+                    "query": "MATCH (n)-[e]->(m) RETURN n,e,m LIMIT 20\n\n\n",
+                    "width": 6,
+                    "height": 4,
+                    "x": 6,
+                    "y": 0,
+                    "type": "graph",
+                    "selection": {
+                        "Entity": "name",
+                        "EXTENDS": "(label)",
+                        "BELONGS_TO": "(label)",
+                        "HAS_PARAMETER": "(label)",
+                        "RETURNS": "(label)"
+                    },
+                    "settings": {},
+                    "schema": [
+                        [
+                            "Entity",
+                            "name",
+                            "type"
+                        ],
+                        [
+                            "EXTENDS"
+                        ],
+                        [
+                            "BELONGS_TO"
+                        ],
+                        [
+                            "HAS_PARAMETER"
+                        ],
+                        [
+                            "RETURNS"
+                        ]
+                    ]
+                },
+                {
+                    "id": "9fadc1d5-450c-459c-9bfc-8406c88f9737",
+                    "title": "",
+                    "query": "MATCH (n)-[e:HAS_PARAMETER]->(m) RETURN n,e,m LIMIT 20\n\n\n\n\n\n",
+                    "width": 6,
+                    "height": 4,
+                    "x": 12,
+                    "y": 0,
+                    "type": "graph",
+                    "selection": {
+                        "Entity": "name",
+                        "HAS_PARAMETER": "(label)"
+                    },
+                    "settings": {},
+                    "schema": [
+                        [
+                            "Entity",
+                            "name",
+                            "type"
+                        ],
+                        [
+                            "HAS_PARAMETER"
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "parameters": {},
+    "extensions": {
+        "active": true,
+        "activeReducers": []
+    }
+}
