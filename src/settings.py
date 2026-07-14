@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     neo4j_uri: str = "bolt://localhost:7687"
     neo4j_user: str = "neo4j"
     neo4j_password: str = "password"
+    graphdb_url: str = "http://localhost:7200"
+    graphdb_repo: str = "devdoc"
     data_raw_dir: str = "data/raw"
     data_processed_dir: str = "data/processed"
 

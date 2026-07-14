@@ -33,3 +33,21 @@ services:
         condition: service_healthy
 
 # neodash connects to bolt://localhost:7687
+
+  graphdb:
+    image: ontotext/graphdb:10.8.0
+    container_name: kg-graphdb
+    ports:
+      - "7200:7200"
+    environment:
+      GDB_JAVA_OPTS: >-
+        -Xms1g -Xmx2g
+      GDB_HEAP_SIZE: 2g
+    volumes:
+      - ./docker/graphdb/data:/opt/graphdb/home/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7200/rest/repositories"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s

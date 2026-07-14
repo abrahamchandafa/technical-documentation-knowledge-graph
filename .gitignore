@@ -225,3 +225,6 @@ abrah_rough/
 # Neo4j database files (can be multiple GB)
 docker/neo4j/data/
 docker/neo4j/logs/
+
+# GraphDB database files
+docker/graphdb/data/
