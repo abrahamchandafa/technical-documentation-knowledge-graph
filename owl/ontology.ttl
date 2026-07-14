@@ -1,0 +1,18 @@
+@prefix ex: <http://example.org/devdoc/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+ex:depends_on a owl:TransitiveProperty ;
+    rdfs:label "depends on" ;
+    rdfs:comment "If A depends on B and B depends on C, then A depends on C." .
+
+ex:Library a owl:Class .
+ex:Function a owl:Class .
+ex:Module a owl:Class .
+ex:Class a owl:Class .
+ex:Parameter a owl:Class .
+ex:DataType a owl:Class .
+ex:ResponseType a owl:Class .
+ex:URL a owl:Class .
+ex:API a owl:Class .
